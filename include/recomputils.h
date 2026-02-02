@@ -2,11 +2,12 @@
 #define __RECOMPUTILS_H__
 
 #include "modding.h"
-#include "PR/ultratypes.h"
+#include <PR/ultratypes.h>
 
 RECOMP_IMPORT("*", void* recomp_alloc(unsigned long size));
 RECOMP_IMPORT("*", void recomp_free(void* memory));
-RECOMP_IMPORT("*", int recomp_printf(const char* fmt, ...));
+// Note: recomp_printf is not currently available in SSB64 Recompiled
+// RECOMP_IMPORT("*", int recomp_printf(const char* fmt, ...));
 
 // These functions let you get the return value of a function from within a return hook for that function.
 // Calling these outside of a return hook will give an undefined result.

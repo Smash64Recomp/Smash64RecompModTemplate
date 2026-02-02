@@ -11,24 +11,37 @@ id = "ssb64_recomp_mod_template"
 version = "1.0.0"
 
 # The name that will show up for this mod in the mod menu. This should be human readable.
-display_name = "Smash64 Mod Example"
+display_name = "SSB64 Mod Template"
 
 # The description that will show up when this mod is displayed in the mod menu. This should be human readable.
 description =  """
-This is an example mod for Smash64: Recompiled that can be used as a template for creating mods. \
-When this mod is enabled, you will always tumble jump.
+Template for creating Super Smash Bros. 64 Recompiled mods.
+
+This template demonstrates:
+- How to export custom functions
+- How to use config options
+- How to structure a mod project
+- Where to add function hooks when they become available
+
+IMPORTANT: Some functions from the decomp may not be available in the 
+recompiled game yet. Check MODDING_GUIDE.md for instructions on testing
+which functions are available.
+
+To customize this template:
+1. Edit src/mod.c to add your functionality
+2. Update mod.toml with your mod's name and description
+3. Build with 'make' and test!
 
 For more details, see https://github.com/sonicdcer/Smash64RecompModTemplate."""
 
 # A short description that will show up in this mod's entry in the mod list. This should be human readable and kept short
-# to prevent it from being cut off due to the limited space.
-short_description = "Mod example that makes you always tumble jump."
+short_description = "Template for creating Smash64 Recompiled mods"
 
 # Authors of this mod.
 authors = [ "Your name here" ]
 
 # ID of the target recomp game.
-game_id = "ssb64"
+game_id = "ssb"
 
 # Minimum version of the target recomp (e.g. Smash64: Recompiled) that this mod can run on.
 minimum_recomp_version = "0.0.1"
@@ -52,15 +65,16 @@ native_libraries = [
 elf_path = "build/mod.elf"
 
 # Output mod filename.
-mod_filename = "ssb64_recomp_mod_template"
+mod_filename = "Smash64_mod_template"
 
 # Reference symbol files.
-func_reference_syms_file = "Smash64RecompSyms/ssb64.us.syms.toml"
-data_reference_syms_files = [ "Smash64RecompSyms/ssb64.us.datasyms.toml" ]
+func_reference_syms_file = "Smash64RecompSyms/smashbrothers.us.syms.toml"
+data_reference_syms_files = [ "Smash64RecompSyms/smashbrothers.us.datasyms.toml" ]
 
 # Additional files to include in the mod.
 additional_files = [ ]
 
+# Config options that users can modify in the mod menu
 [[manifest.config_options]]
 id = "enum_option"
 name = "Enum Option"
