@@ -14,25 +14,17 @@ version = "1.0.0"
 display_name = "SSB64 Mod Template"
 
 # The description that will show up when this mod is displayed in the mod menu. This should be human readable.
-description =  """
-Template for creating Super Smash Bros. 64 Recompiled mods.
+description = """
+Template for creating Super Smash Bros. 64: Recompiled mods.
 
-This template demonstrates:
-- How to export custom functions
-- How to use config options
-- How to structure a mod project
-- Where to add function hooks when they become available
-
-IMPORTANT: Some functions from the decomp may not be available in the 
-recompiled game yet. Check MODDING_GUIDE.md for instructions on testing
-which functions are available.
+The sample code holds every fighter's damage at a fixed percent while the Damage Lock option is enabled.
 
 To customize this template:
 1. Edit src/mod.c to add your functionality
-2. Update mod.toml with your mod's name and description
-3. Build with 'make' and test!
+2. Update mod.toml with your mod's ID, name and description
+3. Build with 'make', then run RecompModTool (see the README)
 
-For more details, see https://github.com/sonicdcer/Smash64RecompModTemplate."""
+For more details, see https://github.com/Smash64Recomp/Smash64RecompModTemplate."""
 
 # A short description that will show up in this mod's entry in the mod list. This should be human readable and kept short
 short_description = "Template for creating Smash64 Recompiled mods"
@@ -76,28 +68,21 @@ additional_files = [ ]
 
 # Config options that users can modify in the mod menu
 [[manifest.config_options]]
-id = "enum_option"
-name = "Enum Option"
-description = "Test enum config option"
+id = "damage_lock"
+name = "Damage Lock"
+description = "Holds every fighter's damage at the percent below."
 type = "Enum"
-options = [ "First", "Second" ]
-default = "First"
+options = [ "Off", "On" ]
+default = "Off"
 
 [[manifest.config_options]]
-id = "number_option"
-name = "Number Option"
-description = "Test number config option."
+id = "damage_lock_percent"
+name = "Locked Percent"
+description = "Damage percent fighters are held at while Damage Lock is on."
 type = "Number"
 min = 0
-max = 10
-step = 0.1
-precision = 1
+max = 999
+step = 1
+precision = 0
 percent = false
-default = 1
-
-[[manifest.config_options]]
-id = "string_option"
-name = "String Option"
-description = "Test string config option."
-type = "String"
-default = "Lorem Ipsum"
+default = 0
