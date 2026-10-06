@@ -76,7 +76,11 @@
 #define G_EX_SETPROJMATRIXFLOAT_V1      0x00002D
 #define G_EX_SETVIEWMATRIXFLOAT_V1      0x00002E
 #define G_EX_SETNEARCLIPPING_V1         0x00002F
-#define G_EX_MAX                        0x000030
+#define G_EX_MATRIX_FLOAT_V1            0x000030
+#define G_EX_SETVERTEXSEGMENT_V1        0x000031
+#define G_EX_SETTEXCOORDWRAPPOINT_V1    0x000032
+#define G_EX_SETRECTASPECT_V1           0x000033
+#define G_EX_MAX                        0x000034
 
 #define G_EX_ORIGIN_NONE            0x800
 #define G_EX_ORIGIN_LEFT            0x0
@@ -109,6 +113,13 @@
 #define G_EX_ASPECT_AUTO            0x0
 #define G_EX_ASPECT_STRETCH         0x1
 #define G_EX_ASPECT_ADJUST          0x2
+
+#define G_EX_VERTEX_POSITION        0x0
+#define G_EX_VERTEX_VELOCITY        0x1
+#define G_EX_VERTEX_MAX             0x2
+
+#define G_EX_DISABLED               0x0
+#define G_EX_ENABLED                0x1
 
 // Represents the 8-byte commands in the F3D microcode family
 typedef union {
@@ -538,6 +549,34 @@ typedef union {
     G_EX_COMMAND1(cmd, \
         PARAM(RT64_EXTENDED_OPCODE, 8, 24) | PARAM(G_EX_SETNEARCLIPPING_V1, 24, 0), \
         PARAM(isEnabled, 1, 0) \
+    )
+
+#define gEXMatrixFloat(cmd, m, p) \
+    G_EX_COMMAND2(cmd, \
+        PARAM(RT64_EXTENDED_OPCODE, 8, 24) | PARAM(G_EX_MATRIX_FLOAT_V1, 24, 0), \
+        PARAM((p), 8, 0), \
+        0, \
+        (unsigned)(m) \
+    )
+
+#define gEXSetVertexSegment(cmd, vertexElement, isEnabled, vertexAddress, baseSegmentAddress) \
+    G_EX_COMMAND2(cmd, \
+        PARAM(RT64_EXTENDED_OPCODE, 8, 24) | PARAM(G_EX_SETVERTEXSEGMENT_V1, 24, 0), \
+        PARAM((isEnabled), 1, 0) | PARAM((vertexElement), 4, 1), \
+        (unsigned)(vertexAddress), \
+        (unsigned)(baseSegmentAddress) \
+    )
+
+#define gEXSetTexcoordWrapPoint(cmd, wrapPointU, wrapPointV) \
+    G_EX_COMMAND1(cmd, \
+        PARAM(RT64_EXTENDED_OPCODE, 8, 24) | PARAM(G_EX_SETTEXCOORDWRAPPOINT_V1, 24, 0), \
+        PARAM(wrapPointU, 16, 16) | PARAM(wrapPointV, 16, 0) \
+    )
+
+#define gEXSetRectAspect(cmd, aspect) \
+    G_EX_COMMAND1(cmd, \
+        PARAM(RT64_EXTENDED_OPCODE, 8, 24) | PARAM(G_EX_SETRECTASPECT_V1, 24, 0), \
+        PARAM(aspect, 2, 0) \
     )
 
 #endif // RT64_EXTENDED_GBI

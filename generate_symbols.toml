@@ -4,5 +4,4 @@
 entrypoint = 0x80000400
 # Paths are relative to the location of this config file.
 output_func_path = "RecompiledFuncs"
-relocatable_sections_path = "overlays.us.rev1.txt"
 elf_path = "smashbrothers.us.elf"
